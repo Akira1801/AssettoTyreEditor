@@ -44,110 +44,128 @@
             const [parsedTyres, setParsedTyres] = useState([]);
             const [selectedTyre, setSelectedTyre] = useState(null);
 
+            const baseline = {
+                DX_REF: 2.6,
+                DY_REF: 1.810,
+                XMU: 0.27,
+                FRICTION_LIMIT_ANGLE: 8.20,
+                RELAXATION_LENGTH: 0.07130,
+                SPEED_SENSITIVITY: 0.003500,
+                ROLLING_RESISTANCE_0: 12,
+                FALLOFF_LEVEL: 0.88,
+                LS_EXPY: 0.7900,
+                LS_EXPX: 0.8600,
+                FRICTION_K: 0.04519,
+                ROLLING_K: 0.11,
+                SURFACE_TRANSFER: 0.0200,
+                GRAIN_GAIN: 0.40,
+                BLISTER_GAIN: 0.4,
+            };
+            
             const presets = {
                 stock: {
                     name: 'Stock/Original',
-                    gripMultiplier: 1.0,
+                    description: 'Standard road tyres - comfort focused',
                     values: {
-                        DX_REF_mult: 1.0,
-                        DY_REF_mult: 1.0,
-                        XMU_mult: 1.0,
-                        FRICTION_LIMIT_ANGLE: 0,
-                        RELAXATION_LENGTH_mult: 1.0,
-                        SPEED_SENSITIVITY_mult: 1.0,
-                        ROLLING_RESISTANCE_0_mult: 1.0,
-                        FALLOFF_LEVEL: 0,
-                        LS_EXPY: 0,
-                        LS_EXPX: 0,
-                        FRICTION_K_mult: 1.0,
-                        ROLLING_K_mult: 1.0,
-                        SURFACE_TRANSFER_mult: 1.0,
-                        GRAIN_GAIN_mult: 1.0,
-                        BLISTER_GAIN_mult: 1.0,
+                        DX_REF: baseline.DX_REF * 0.50,           // 1.3
+                        DY_REF: baseline.DY_REF * 0.50,           // 0.905
+                        XMU: baseline.XMU * 0.85,                  // 0.2295
+                        FRICTION_LIMIT_ANGLE: baseline.FRICTION_LIMIT_ANGLE * 0.61,  // 5.0
+                        RELAXATION_LENGTH: baseline.RELAXATION_LENGTH * 2.0,         // 0.1426
+                        SPEED_SENSITIVITY: baseline.SPEED_SENSITIVITY * 2.0,         // 0.007
+                        ROLLING_RESISTANCE_0: baseline.ROLLING_RESISTANCE_0 * 1.5,   // 18
+                        FALLOFF_LEVEL: baseline.FALLOFF_LEVEL * 0.80,                // 0.704
+                        LS_EXPY: baseline.LS_EXPY * 0.76,          // 0.60
+                        LS_EXPX: baseline.LS_EXPX * 0.70,          // 0.60
+                        FRICTION_K: baseline.FRICTION_K * 1.5,     // 0.0678
+                        ROLLING_K: baseline.ROLLING_K * 1.5,       // 0.165
+                        SURFACE_TRANSFER: baseline.SURFACE_TRANSFER * 0.75,  // 0.015
+                        GRAIN_GAIN: baseline.GRAIN_GAIN * 1.5,     // 0.60
+                        BLISTER_GAIN: baseline.BLISTER_GAIN * 1.5, // 0.60
                     }
                 },
                 street: {
                     name: 'Street Performance',
-                    gripMultiplier: 1.2,
+                    description: 'High-performance street tyres',
                     values: {
-                        DX_REF_mult: 1.2,
-                        DY_REF_mult: 1.2,
-                        XMU_mult: 1.15,
-                        FRICTION_LIMIT_ANGLE: 1,
-                        RELAXATION_LENGTH_mult: 0.7,
-                        SPEED_SENSITIVITY_mult: 0.5,
-                        ROLLING_RESISTANCE_0_mult: 0.8,
-                        FALLOFF_LEVEL: 0.05,
-                        LS_EXPY: 0.1,
-                        LS_EXPX: 0.1,
-                        FRICTION_K_mult: 0.7,
-                        ROLLING_K_mult: 0.8,
-                        SURFACE_TRANSFER_mult: 1.5,
-                        GRAIN_GAIN_mult: 0.7,
-                        BLISTER_GAIN_mult: 0.7,
+                        DX_REF: baseline.DX_REF * 0.69,           // 1.794
+                        DY_REF: baseline.DY_REF * 0.69,           // 1.249
+                        XMU: baseline.XMU * 0.93,                  // 0.251
+                        FRICTION_LIMIT_ANGLE: baseline.FRICTION_LIMIT_ANGLE * 0.78,  // 6.4
+                        RELAXATION_LENGTH: baseline.RELAXATION_LENGTH * 1.4,         // 0.0998
+                        SPEED_SENSITIVITY: baseline.SPEED_SENSITIVITY * 1.4,         // 0.0049
+                        ROLLING_RESISTANCE_0: baseline.ROLLING_RESISTANCE_0 * 1.25,  // 15
+                        FALLOFF_LEVEL: baseline.FALLOFF_LEVEL * 0.88,                // 0.774
+                        LS_EXPY: baseline.LS_EXPY * 0.87,          // 0.687
+                        LS_EXPX: baseline.LS_EXPX * 0.84,          // 0.722
+                        FRICTION_K: baseline.FRICTION_K * 1.2,     // 0.0542
+                        ROLLING_K: baseline.ROLLING_K * 1.2,       // 0.132
+                        SURFACE_TRANSFER: baseline.SURFACE_TRANSFER * 0.85,  // 0.017
+                        GRAIN_GAIN: baseline.GRAIN_GAIN * 1.25,    // 0.50
+                        BLISTER_GAIN: baseline.BLISTER_GAIN * 1.25,// 0.50
                     }
                 },
                 sport: {
                     name: 'Sport/Track',
-                    gripMultiplier: 1.5,
+                    description: 'Track-focused semi-slick tyres',
                     values: {
-                        DX_REF_mult: 1.4,
-                        DY_REF_mult: 1.5,
-                        XMU_mult: 1.3,
-                        FRICTION_LIMIT_ANGLE: 2,
-                        RELAXATION_LENGTH_mult: 0.3,
-                        SPEED_SENSITIVITY_mult: 0.2,
-                        ROLLING_RESISTANCE_0_mult: 0.6,
-                        FALLOFF_LEVEL: 0.1,
-                        LS_EXPY: 0.25,
-                        LS_EXPX: 0.25,
-                        FRICTION_K_mult: 0.4,
-                        ROLLING_K_mult: 0.5,
-                        SURFACE_TRANSFER_mult: 2.5,
-                        GRAIN_GAIN_mult: 0.4,
-                        BLISTER_GAIN_mult: 0.4,
+                        DX_REF: baseline.DX_REF * 0.85,           // 2.21
+                        DY_REF: baseline.DY_REF * 0.85,           // 1.539
+                        XMU: baseline.XMU * 0.96,                  // 0.259
+                        FRICTION_LIMIT_ANGLE: baseline.FRICTION_LIMIT_ANGLE * 0.90,  // 7.38
+                        RELAXATION_LENGTH: baseline.RELAXATION_LENGTH * 1.1,         // 0.0784
+                        SPEED_SENSITIVITY: baseline.SPEED_SENSITIVITY * 1.1,         // 0.00385
+                        ROLLING_RESISTANCE_0: baseline.ROLLING_RESISTANCE_0 * 1.08,  // 13
+                        FALLOFF_LEVEL: baseline.FALLOFF_LEVEL * 0.95,                // 0.836
+                        LS_EXPY: baseline.LS_EXPY * 0.94,          // 0.743
+                        LS_EXPX: baseline.LS_EXPX * 0.93,          // 0.800
+                        FRICTION_K: baseline.FRICTION_K * 1.08,    // 0.0488
+                        ROLLING_K: baseline.ROLLING_K * 1.08,      // 0.119
+                        SURFACE_TRANSFER: baseline.SURFACE_TRANSFER * 0.93,  // 0.0186
+                        GRAIN_GAIN: baseline.GRAIN_GAIN * 1.1,     // 0.44
+                        BLISTER_GAIN: baseline.BLISTER_GAIN * 1.1, // 0.44
                     }
                 },
                 race: {
-                    name: 'Race/Slick',
-                    gripMultiplier: 1.8,
+                    name: 'Race/Slick (Baseline)',
+                    description: 'Your current semislick setup',
                     values: {
-                        DX_REF_mult: 1.65,
-                        DY_REF_mult: 1.7,
-                        XMU_mult: 1.5,
-                        FRICTION_LIMIT_ANGLE: 3.5,
-                        RELAXATION_LENGTH_mult: 0.1,
-                        SPEED_SENSITIVITY_mult: 0.05,
-                        ROLLING_RESISTANCE_0_mult: 0.4,
-                        FALLOFF_LEVEL: 0.15,
-                        LS_EXPY: 0.35,
-                        LS_EXPX: 0.35,
-                        FRICTION_K_mult: 0.2,
-                        ROLLING_K_mult: 0.3,
-                        SURFACE_TRANSFER_mult: 4.0,
-                        GRAIN_GAIN_mult: 0.2,
-                        BLISTER_GAIN_mult: 0.2,
+                        DX_REF: baseline.DX_REF,                  // 2.6
+                        DY_REF: baseline.DY_REF,                  // 1.810
+                        XMU: baseline.XMU,                        // 0.27
+                        FRICTION_LIMIT_ANGLE: baseline.FRICTION_LIMIT_ANGLE,  // 8.20
+                        RELAXATION_LENGTH: baseline.RELAXATION_LENGTH,        // 0.07130
+                        SPEED_SENSITIVITY: baseline.SPEED_SENSITIVITY,        // 0.003500
+                        ROLLING_RESISTANCE_0: baseline.ROLLING_RESISTANCE_0,  // 12
+                        FALLOFF_LEVEL: baseline.FALLOFF_LEVEL,                // 0.88
+                        LS_EXPY: baseline.LS_EXPY,                // 0.7900
+                        LS_EXPX: baseline.LS_EXPX,                // 0.8600
+                        FRICTION_K: baseline.FRICTION_K,          // 0.04519
+                        ROLLING_K: baseline.ROLLING_K,            // 0.11
+                        SURFACE_TRANSFER: baseline.SURFACE_TRANSFER,  // 0.0200
+                        GRAIN_GAIN: baseline.GRAIN_GAIN,          // 0.40
+                        BLISTER_GAIN: baseline.BLISTER_GAIN,      // 0.4
                     }
                 },
                 arcade: {
                     name: 'Arcade/Maximum',
-                    gripMultiplier: 2.5,
+                    description: 'Unrealistic mega-grip for fun',
                     values: {
-                        DX_REF_mult: 2.0,
-                        DY_REF_mult: 2.1,
-                        XMU_mult: 1.8,
-                        FRICTION_LIMIT_ANGLE: 5,
-                        RELAXATION_LENGTH_mult: 0.02,
-                        SPEED_SENSITIVITY_mult: 0.01,
-                        ROLLING_RESISTANCE_0_mult: 0.2,
-                        FALLOFF_LEVEL: 0.25,
-                        LS_EXPY: 0.5,
-                        LS_EXPX: 0.5,
-                        FRICTION_K_mult: 0.05,
-                        ROLLING_K_mult: 0.1,
-                        SURFACE_TRANSFER_mult: 8.0,
-                        GRAIN_GAIN_mult: 0.05,
-                        BLISTER_GAIN_mult: 0.05,
+                        DX_REF: baseline.DX_REF * 1.35,           // 3.51
+                        DY_REF: baseline.DY_REF * 1.35,           // 2.444
+                        XMU: baseline.XMU * 1.15,                  // 0.3105
+                        FRICTION_LIMIT_ANGLE: baseline.FRICTION_LIMIT_ANGLE * 1.34,  // 11.0
+                        RELAXATION_LENGTH: baseline.RELAXATION_LENGTH * 0.5,         // 0.0357
+                        SPEED_SENSITIVITY: baseline.SPEED_SENSITIVITY * 0.5,         // 0.00175
+                        ROLLING_RESISTANCE_0: baseline.ROLLING_RESISTANCE_0 * 0.67,  // 8
+                        FALLOFF_LEVEL: baseline.FALLOFF_LEVEL * 1.02,                // 0.898
+                        LS_EXPY: baseline.LS_EXPY * 1.14,          // 0.90
+                        LS_EXPX: baseline.LS_EXPX * 1.16,          // 1.00
+                        FRICTION_K: baseline.FRICTION_K * 0.66,    // 0.0298
+                        ROLLING_K: baseline.ROLLING_K * 0.73,      // 0.08
+                        SURFACE_TRANSFER: baseline.SURFACE_TRANSFER * 1.5,   // 0.03
+                        GRAIN_GAIN: baseline.GRAIN_GAIN * 0.5,     // 0.20
+                        BLISTER_GAIN: baseline.BLISTER_GAIN * 0.5, // 0.20
                     }
                 }
             };
